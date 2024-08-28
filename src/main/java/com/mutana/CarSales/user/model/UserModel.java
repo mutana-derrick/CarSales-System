@@ -20,7 +20,7 @@ public class UserModel {
 
     @ManyToOne
     @JoinColumn(name = "employeeId")
-    private EmployeeModel employee;
+    private EmployeeModel employeeId;
 
     private String username;
     private String password;
@@ -29,5 +29,10 @@ public class UserModel {
     private String status; // 'Active', 'Inactive'
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+
+//    public void setRole(String role) {
+//        this.role = role != null ? role.toUpperCase() : null;
+//    }
+
 }
 
