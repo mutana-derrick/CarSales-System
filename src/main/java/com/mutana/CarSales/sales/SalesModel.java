@@ -2,7 +2,7 @@ package com.mutana.CarSales.sales;
 
 import com.mutana.CarSales.car.CarModel;
 import com.mutana.CarSales.customer.CustomerModel;
-import com.mutana.CarSales.user.UserModel;
+import com.mutana.CarSales.user.model.UserModel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

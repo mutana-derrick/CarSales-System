@@ -1,4 +1,4 @@
-package com.mutana.CarSales.user;
+package com.mutana.CarSales.user.model;
 
 import com.mutana.CarSales.employee.EmployeeModel;
 import jakarta.persistence.*;

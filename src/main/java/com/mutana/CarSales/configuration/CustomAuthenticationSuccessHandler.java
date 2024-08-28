@@ -18,15 +18,18 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String redirectUrl = "/";
 
         switch (role) {
+
             case "ROLE_ADMIN":
                 redirectUrl = "/ceo/dashboard";
-                break;
+            break;
+
             case "ROLE_EDITOR":
                 redirectUrl = "/manager/dashboard";
-                break;
+            break;
+
             case "ROLE_VIEWER":
                 redirectUrl = "/salesperson/dashboard";
-                break;
+            break;
         }
 
         response.sendRedirect(redirectUrl);

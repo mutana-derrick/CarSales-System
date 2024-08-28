@@ -1,5 +1,7 @@
-package com.mutana.CarSales.user;
+package com.mutana.CarSales.user.service;
 
+import com.mutana.CarSales.user.model.UserModel;
+import com.mutana.CarSales.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
