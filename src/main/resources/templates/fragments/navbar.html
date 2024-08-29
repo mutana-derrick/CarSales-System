@@ -1,0 +1,113 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<div th:fragment="navbar">
+    <nav class="col-md-2 d-none d-md-block sidebar shadow position-fixed vh-100">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column mt-2 mb-5">
+                <!-- Dashboard -->
+                <li class="nav-item" style="border-bottom:none; color:white;">
+                    <a class="nav-link" href="#">
+                        Dashboard
+                    </a>
+                </li>
+
+                <!-- Institutions Menu -->
+                <li class="nav-item mt-5">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#institutionsMenu" role="button" aria-expanded="false" aria-controls="institutionsMenu">
+                        <span>Institutions</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="institutionsMenu">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">View</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Manage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Lectures Menu -->
+                <li class="nav-item mt-3">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#lecturesMenu" role="button" aria-expanded="false" aria-controls="lecturesMenu">
+                        <span>Lectures</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="lecturesMenu">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">View</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Manage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Students Menu -->
+                <li class="nav-item mt-3">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#studentsMenu" role="button" aria-expanded="false" aria-controls="studentsMenu">
+                        <span>Students</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="studentsMenu">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">View</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Manage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Courses Menu -->
+                <li class="nav-item mt-3">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#coursesMenu" role="button" aria-expanded="false" aria-controls="coursesMenu">
+                        <span>Courses</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="coursesMenu">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">View</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Manage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Assigned Course Menu -->
+                <li class="nav-item mt-3 mb-5">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#assignedCourseMenu" role="button" aria-expanded="false" aria-controls="assignedCourseMenu">
+                        <span>Assigned Course</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="assignedCourseMenu">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">View</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Manage</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Logout -->
+                <li class="nav-item mt-5 shadow-lg"
+                    style="border:1px solid white; border-radius:20px; display: flex; justify-content: center; align-items: center;">
+                    <a class="nav-link" href="#">
+                        Logout &nbsp;<i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
