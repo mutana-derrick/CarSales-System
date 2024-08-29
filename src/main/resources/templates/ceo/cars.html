@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Admin | Dashboard</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <title>Cars | Management</title>
     <!-- favicon -->
     <link rel="icon" type="img/png" href="/static/image/favicon.png">
 
@@ -18,10 +16,15 @@
 
     <!--    external css-->
     <link rel="stylesheet" type="text/css" th:href="@{/css/ceo/style.css}">
-</head>
 
+</head>
 <body>
 <div class="container-fluid">
+    <!-- Display success message -->
+    <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${message}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     <!-- Top Bar -->
     <div class="row topbar shadow">
         <div class="col-md-12">
@@ -54,54 +57,61 @@
         <!-- Main Content -->
         <main role="main" class="content-wrapper col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="dashboard-container">
-                <h2>Dashboard Overview</h2>
+                <h2>Cars Management</h2>
+
                 <div class="card shadow">
                     <div class="card-header">
                         Cars <i class="fa-solid fa-car"></i>
                     </div>
                     <div class="card-body">
-                        <p>Total Cars in Store:</p>
-                        <p>Recent Cars:</p>
-                        <ul>
-                            <li>Cars</li>
-                        </ul>
-                        <a href="/ceo/cars" class="btn btn-primary">View All Cars</a>
-                    </div>
-                </div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2>All Cars</h2>
+                            <div class="d-flex">
+                                <button class="btn btn-primary shadow me-2" data-bs-toggle="modal"
+                                        data-bs-target="#addCarModal">Add A Car
+                                </button>
+                            </div>
+                        </div>
 
-                <div class="card shadow">
-                    <div class="card-header">
-                        Sales <i class="fa-solid fa-money-bill-transfer"></i>
-                    </div>
-                    <div class="card-body">
-                        <p>Total Sales Made:</p>
-                        <p>Recently Made Sales:</p>
-                        <ul></ul>
-                        <a href="#" class="btn btn-primary">View All Sales</a>
-                    </div>
-                </div>
-
-                <div class="card shadow">
-                    <div class="card-header">
-                        Employees <i class="fa-solid fa-users"></i>
-                    </div>
-                    <div class="card-body">
-                        <p>Total Employees available:</p>
-                        <p>Recently Employeed:</p>
-                        <ul></ul>
-                        <a href="#" class="btn btn-primary">View All Employees</a>
-                    </div>
-                </div>
-
-                <div class="card shadow">
-                    <div class="card-header">
-                        Customers <i class="fa-solid fa-users"></i>
-                    </div>
-                    <div class="card-body">
-                        <p>Total Customers available:</p>
-                        <p>Recently Gained Customers:</p>
-                        <ul></ul>
-                        <a href="#" class="btn btn-primary">View All Customers</a>
+                        <table id="example" class="display nowrap table table-striped" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Model</th>
+                                <th>Year</th>
+                                <th>Price</th>
+                                <th>Stock Status</th>
+                                <th>Created By</th>
+                                <th>Created On</th>
+                                <th>Updated By</th>
+                                <th>Updated On</th>
+                                <th>Modify</th>
+                                <!-- <th>Delete</th> -->
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="car : ${cars}">
+                                <td th:text="${car.carId}"></td>
+                                <td th:text="${car.model}"></td>
+                                <td th:text="${car.year}"></td>
+                                <td th:text="${car.price}"></td>
+                                <td th:text="${car.stockStatus}"></td>
+                                <td th:text="${car.createdBy.username}"></td>
+                                <td th:text="${car.createdAt}"></td>
+                                <td th:text="${car.modifiedBy != null ? car.modifiedBy.username : 'Not Yet!'}"></td>
+                                <td th:text="${car.modifiedAt != null ? car.modifiedAt : 'Not Yet!'}"></td>
+                                <td>
+                                    <button class="btn btn-success editbtn" data-bs-toggle="modal"
+                                            data-bs-target="#editCarModal">
+                                        <i class="fa-solid fa-user-pen"></i>
+                                    </button>
+                                </td>
+                                <!-- <td>
+                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                </td> -->
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -109,11 +119,26 @@
     </div>
 </div>
 
-<!-- Bootstrap JS and dependencies -->
+<!-- include Models -->
+<div th:include="fragments/ceo/models :: models"></div>
+<!-- Bootstrap JS and cdns -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+<!-- datatables cdns -->
+<script src="//code.jquery.com/jquery-3.7.1.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="//cdn.datatables.net/2.0.1/js/dataTables.js"></script>
+<script src="//cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
+<script src="//cdn.datatables.net/responsive/3.0.0/js/dataTables.responsive.js"></script>
+<script src="//cdn.datatables.net/responsive/3.0.0/js/responsive.bootstrap5.js"></script>
+
+<!-- data table script -->
+<script>
+    DataTable.defaults.responsive = true;
+    new DataTable('#example');
+</script>
 <!-- JavaScript for Chevron Rotation  -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {

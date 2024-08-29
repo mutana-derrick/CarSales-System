@@ -18,10 +18,18 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public Optional<UserModel> getUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+
+    public UserModel getUserByIdOrThrow(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+    }
+
     @Transactional
     public UserModel saveUser(UserModel user) {
         return userRepository.save(user);
     }
-
-    // Add more user-related methods as needed
 }

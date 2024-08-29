@@ -1,0 +1,53 @@
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="models">
+    <!-- Add Car Modal -->
+    <div class="modal fade" id="addCarModal" tabindex="-1" aria-labelledby="addCarModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCarModalLabel">Add A Car</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/ceo/addCar}" method="post">
+                        <div class="mb-3">
+                            <label for="model" class="form-label">Car Model:</label>
+                            <input type="text" class="form-control" id="model" name="model" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="year" class="form-label">Year:</label>
+                            <input type="date" class="form-control" id="year" name="year" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="price" class="form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Category:</label>
+                            <select class="form-control" id="category" name="category" required>
+                                <!-- Assuming categories are being passed from the controller -->
+                                <option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="stockStatus" class="form-label">Stock Status:</label>
+                            <select class="form-control" id="stockStatus" name="stockStatus" required>
+                                <option value="Available">Available</option>
+                                <option value="Sold">Sold</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark shadow">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
