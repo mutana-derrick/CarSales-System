@@ -72,7 +72,7 @@ public class SecurityConfiguration {
             return org.springframework.security.core.userdetails.User
                     .withUsername(user.getUsername())
                     .password(user.getPassword())
-                    .roles(user.getRole().toUpperCase())
+                    .roles(user.getRole().name())
                     .build();
         };
     }

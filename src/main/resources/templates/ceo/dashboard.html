@@ -23,34 +23,11 @@
 <body>
 <div class="container-fluid">
     <!-- Top Bar -->
-    <div class="row topbar shadow">
-        <div class="col-md-12">
-            <div class="d-flex justify-content-between align-items-center">
-                <h2>Admin Dashboard</h2>
-                <div class="d-flex align-items-center">
-                    <!-- Profile Icon with Dropdown -->
-                    <div class="dropdown">
-                        <button class="btn btn-sm shadow dropdown-toggle" type="button" id="profileDropdown"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                style="border:1px solid white; display: flex; justify-content: center; align-items: center;">
-                            <img width="30" height="30"
-                                 src="https://img.icons8.com/ios-filled/100/000000/admin-settings-male.png" alt="user"
-                                 style="filter: invert(100%);"/>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item" href="#">Profile</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Logout</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:include="fragments/ceo/topbar :: topbar"></div>
 
     <div class="row">
         <!-- Side Bar -->
-        <div th:include="fragments/navbar :: navbar"></div>
+        <div th:include="fragments/ceo/navbar :: navbar"></div>
         <!-- Main Content -->
         <main role="main" class="content-wrapper col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="dashboard-container">
@@ -89,7 +66,7 @@
                         <p>Total Employees available:</p>
                         <p>Recently Employeed:</p>
                         <ul></ul>
-                        <a href="#" class="btn btn-primary">View All Employees</a>
+                        <a href="/ceo/employee" class="btn btn-primary">View All Employees</a>
                     </div>
                 </div>
 
@@ -113,40 +90,5 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-<!-- JavaScript for Chevron Rotation  -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const navLinks = document.querySelectorAll('.nav-item .nav-link');
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                const icon = this.querySelector('i');
-                const parentNavItem = this.parentElement;
-
-                // Toggle rotation of the icon
-                if (icon.style.transform === 'rotate(180deg)') {
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    icon.style.transform = 'rotate(180deg)';
-                }
-
-                // Toggle the selected class on nav link and nav item
-                if (this.classList.contains('selected')) {
-                    this.classList.remove('selected');
-                    parentNavItem.classList.remove('selected');
-                } else {
-                    // Remove 'selected' class from all nav links and nav items
-                    document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('selected'));
-                    document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('selected'));
-
-                    // Add 'selected' class to the clicked nav link and nav item
-                    this.classList.add('selected');
-                    parentNavItem.classList.add('selected');
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>

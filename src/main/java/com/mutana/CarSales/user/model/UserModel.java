@@ -24,7 +24,9 @@ public class UserModel {
 
     private String username;
     private String password;
-    private String role; // 'view', 'editor', 'admin'
+    
+    @Enumerated(EnumType.STRING)
+    private Role role; // 'view', 'editor', 'admin'
 
     private String status; // 'Active', 'Inactive'
     private LocalDateTime createdAt;

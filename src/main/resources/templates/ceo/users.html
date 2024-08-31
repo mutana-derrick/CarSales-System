@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Cars | Management</title>
+    <title>Role | Management</title>
     <!-- favicon -->
     <link rel="icon" type="img/png" href="/static/image/favicon.png">
 
@@ -29,80 +29,67 @@
         <span th:text="${message}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-
     <!-- Top Bar -->
     <div th:include="fragments/ceo/topbar :: topbar"></div>
-
     <div class="row">
         <!-- Side Bar -->
         <div th:include="fragments/ceo/navbar :: navbar"></div>
         <!-- Main Content -->
         <main role="main" class="content-wrapper col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="dashboard-container">
-                <h2>Cars Management</h2>
-
+                <h2>System Users</h2>
                 <div class="card shadow">
                     <div class="card-header">
-                        Cars <i class="fa-solid fa-car"></i>
+                        Users <i class="fa-solid fa-users"></i>
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h2>All Cars</h2>
-                            <div class="d-flex">
-                                <button class="btn btn-primary shadow me-2" data-bs-toggle="modal"
-                                        data-bs-target="#addCarModal">Add A Car
-                                </button>
-                            </div>
+                            <h2>Manage User</h2>
                         </div>
 
-                        <table id="example" class="display nowrap table table-striped" style="width:100%">
+                        <table id="employeeTable" class="display nowrap table table-striped" style="width:100%">
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Model</th>
-                                <th>Year</th>
-                                <th>Price</th>
-                                <th>Stock Status</th>
-                                <th>Created By</th>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Status</th>
                                 <th>Created On</th>
-                                <th>Updated By</th>
                                 <th>Updated On</th>
                                 <th>Modify</th>
-                                <!-- <th>Delete</th> -->
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="car : ${cars}">
-                                <td th:text="${car.carId}"></td>
-                                <td th:text="${car.model}"></td>
-                                <td th:text="${car.year}"></td>
-                                <td th:text="${car.price}"></td>
-                                <td th:text="${car.stockStatus}"></td>
-                                <td th:text="${car.createdBy.username}"></td>
-                                <td th:text="${car.createdAt}"></td>
-                                <td th:text="${car.modifiedBy != null ? car.modifiedBy.username : 'Not Yet!'}"></td>
-                                <td th:text="${car.modifiedAt != null ? car.modifiedAt : 'Not Yet!'}"></td>
+                            <tr th:each="user : ${users}">
+                                <td th:text="${user.userId}"></td>
+                                <td th:text="${user.employeeId?.name}"></td>
+                                <td th:text="${user.employeeId?.position}"></td>
+                                <td th:text="${user.employeeId?.email}"></td>
+                                <td th:text="${user.employeeId?.phone}"></td>
+                                <td th:text="${user.username}"></td>
+                                <td th:text="${user.role}"></td>
+                                <td th:text="${user.status}"></td>
+                                <td th:text="${user.createdAt}"></td>
+                                <td th:text="${user.modifiedAt} != null ? ${user.modifiedAt} : 'Not Yet!'" ></td>
                                 <td>
-                                    <button class="btn btn-success editbtn" data-bs-toggle="modal"
-                                            data-bs-target="#editCarModal">
-                                        <i class="fa-solid fa-user-pen"></i>
-                                    </button>
+                                    <a href="" class="btn btn-success">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                    </a>
                                 </td>
-                                <!-- <td>
-                                    <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                                </td> -->
                             </tr>
                             </tbody>
                         </table>
                     </div>
+
                 </div>
             </div>
         </main>
     </div>
 </div>
-
-<!-- include Models -->
-<div th:include="fragments/ceo/models :: models"></div>
 
 <!-- Bootstrap JS and cdns -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -120,7 +107,7 @@
 <!-- data table script -->
 <script>
     DataTable.defaults.responsive = true;
-    new DataTable('#example');
+    new DataTable('#employeeTable');
 </script>
 </body>
 </html>

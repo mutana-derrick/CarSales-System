@@ -5,12 +5,12 @@
             <ul class="nav flex-column mt-2 mb-5">
                 <!-- Dashboard -->
                 <li class="nav-item" style="border-bottom:none; color:white;">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/ceo/dashboard">
                         Dashboard
                     </a>
                 </li>
 
-                <!-- Institutions Menu -->
+                <!-- Cars Menu -->
                 <li class="nav-item mt-5">
                     <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#institutionsMenu" role="button" aria-expanded="false" aria-controls="institutionsMenu">
                         <span>Cars</span>
@@ -19,16 +19,16 @@
                     <div class="collapse" id="institutionsMenu">
                         <ul class="nav flex-column ml-3">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">View</a>
+                                <a class="nav-link" href="/ceo/cars">View</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Manage</a>
+                                <a class="nav-link" href="/ceo/cars">Manage</a>
                             </li>
                         </ul>
                     </div>
                 </li>
 
-                <!-- Lectures Menu -->
+                <!-- Sales Menu -->
                 <li class="nav-item mt-3">
                     <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#lecturesMenu" role="button" aria-expanded="false" aria-controls="lecturesMenu">
                         <span>Sales</span>
@@ -46,7 +46,7 @@
                     </div>
                 </li>
 
-                <!-- Students Menu -->
+                <!-- Employees Menu -->
                 <li class="nav-item mt-3">
                     <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#studentsMenu" role="button" aria-expanded="false" aria-controls="studentsMenu">
                         <span>Employees</span>
@@ -55,10 +55,10 @@
                     <div class="collapse" id="studentsMenu">
                         <ul class="nav flex-column ml-3">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">View</a>
+                                <a class="nav-link" href="/ceo/employee">View</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Manage</a>
+                                <a class="nav-link" href="/ceo/employee">Manage</a>
                             </li>
                         </ul>
                     </div>
@@ -93,4 +93,38 @@
             </ul>
         </div>
     </nav>
+    <!-- JavaScript for Chevron Rotation  -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-item .nav-link');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    const parentNavItem = this.parentElement;
+
+                    // Toggle rotation of the icon
+                    if (icon.style.transform === 'rotate(180deg)') {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+
+                    // Toggle the selected class on nav link and nav item
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        parentNavItem.classList.remove('selected');
+                    } else {
+                        // Remove 'selected' class from all nav links and nav items
+                        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('selected'));
+                        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('selected'));
+
+                        // Add 'selected' class to the clicked nav link and nav item
+                        this.classList.add('selected');
+                        parentNavItem.classList.add('selected');
+                    }
+                });
+            });
+        });
+    </script>
 </div>

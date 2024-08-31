@@ -1,5 +1,6 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <div th:fragment="models">
+
     <!-- Add Car Modal -->
     <div class="modal fade" id="addCarModal" tabindex="-1" aria-labelledby="addCarModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -43,11 +44,79 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-dark shadow">Submit</button>
+                        <button type="submit" class="btn btn-btn-primary shadow">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Add Employee Modal -->
+    <div class="modal fade" id="addEmployeeModal" tabindex="-1" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addEmployeeModalLabel">Add An Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa-regular fa-circle-xmark"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form th:action="@{/ceo/addEmployee}" method="post">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="position" class="form-label">Position:</label>
+                            <input type="text" class="form-control" id="position" name="position" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone:</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary shadow">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Assign Role Modal -->
+<!--    <div class="modal fade" id="assignRoleModal" tabindex="-1" aria-labelledby="assignRoleModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="assignRoleModalLabel">Assign Role to Employee</h5>-->
+<!--                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close">-->
+<!--                        <i class="fa-regular fa-circle-xmark"></i>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <form id="assignRoleForm" th:action="@{/ceo/employee}" th:object="${employee}" method="post">-->
+<!--                        <input type="text" id="employeeId" th:field="*{employeeId}" name="employeeId">-->
+<!--                        <div class="mb-3">-->
+<!--                            <label for="role" class="form-label">Select Role:</label>-->
+<!--                            <select class="form-select" id="role" name="role" required th:field="*{role}">-->
+<!--                                <option value="">Choose a role...</option>-->
+<!--                                <option  th:each="option : ${roles}" th:value="${option}" th:text="${option}"></option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <button type="submit" class="btn btn-primary shadow">Assign Role</button>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
 </div>
 </html>
