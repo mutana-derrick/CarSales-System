@@ -118,5 +118,10 @@ public class AdminController {
         model.addAttribute("users", users);
         return "ceo/users";
     }
+
+    @GetMapping("/ceo/profile")
+    public String adminProfile() {
+        return "ceo/profile";
+    }
 }
 
