@@ -1,6 +1,7 @@
 package com.mutana.CarSales.user.controller;
 
 import com.mutana.CarSales.car.CarModel;
+import com.mutana.CarSales.car.CarRepository;
 import com.mutana.CarSales.car.CarService;
 import com.mutana.CarSales.category.CategoryModel;
 import com.mutana.CarSales.category.CategoryService;
@@ -12,6 +13,7 @@ import com.mutana.CarSales.user.model.UserModel;
 import com.mutana.CarSales.user.repository.UserRepository;
 import com.mutana.CarSales.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +34,8 @@ public class AdminController {
     @Autowired
     private CarService carService;
     @Autowired
+    private CarRepository carRepository;
+    @Autowired
     private UserService userService;
     @Autowired
     private CategoryService categoryService;
@@ -45,9 +49,24 @@ public class AdminController {
     private PasswordEncoder passwordEncoder; // For encoding the password
 
     @GetMapping("/ceo/dashboard")
-    public String adminDashboard() {
+    public String adminDashboard(Model model) {
+        // Fetch total number of cars and latest 3 cars
+        long totalCars = carRepository.count();
+        List<CarModel> recentCars = carRepository.findTop3ByOrderByCreatedAtDesc();
+
+        // Fetch total number of employees and latest 3 employees
+        long totalEmployees = employeeRepository.count();
+        List<EmployeeModel> recentEmployees = employeeRepository.findTop3ByOrderByCreatedAtDesc();
+
+        model.addAttribute("totalCars", totalCars);
+        model.addAttribute("recentCars", recentCars);
+        model.addAttribute("totalEmployees", totalEmployees);
+        model.addAttribute("recentEmployees", recentEmployees);
+
         return "ceo/dashboard";
     }
+
+
 
     @GetMapping("/ceo/cars")
     public String getCars(Model model) {
