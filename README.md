@@ -7,6 +7,7 @@ The **Car Sales System** is SpringBoot web-based application designed to manage 
 - **Java Spring Boot**
 - **Thymeleaf**
 - **PostgreSQL**
+- **Hibernate**
 
 
 
