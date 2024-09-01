@@ -78,8 +78,8 @@
                                 <td th:text="${employee.position}"></td>
                                 <td th:text="${employee.email}"></td>
                                 <td th:text="${employee.phone}"></td>
-                                <td th:text="${employee.createdBy.username}"></td>
-                                <td th:text="${employee.createdAt}"></td>
+                                <td th:text="${employee.createdBy.username != null ? employee.createdBy.username : 'Unknown'}"></td>
+                                <td th:text="${employee.createdAt != null ? employee.createdAt : 'Null' }"></td>
                                 <td th:text="${employee.modifiedBy != null ? employee.modifiedBy.username : 'Not Yet!'}"></td>
                                 <td th:text="${employee.modifiedAt != null ? employee.modifiedAt : 'Not Yet!'}"></td>
                                 <td th:text="${employee.status}"></td>

@@ -85,6 +85,7 @@ public class AdminController {
         userService.getUserByUsername(username).ifPresent(user -> {
             car.setCreatedBy(user);
             car.setCreatedAt(LocalDateTime.now());
+            car.setStatus("Active");
             carService.saveCar(car);
         });
         redirectAttributes.addFlashAttribute("message", "Car added successfully!");
@@ -101,7 +102,15 @@ public class AdminController {
 
     @PostMapping("/ceo/addEmployee")
     public String addEmployee(@ModelAttribute EmployeeModel employee, RedirectAttributes redirectAttributes) {
-        employeeService.saveEmployee(employee);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        userService.getUserByUsername(username).ifPresent(User ->{
+            employee.setCreatedBy(User);
+            employee.setCreatedAt(LocalDateTime.now());
+            employee.setStatus("Active");
+            employeeService.saveEmployee(employee);
+        });
+
         redirectAttributes.addFlashAttribute("message", "Employee added successfully!");
         return "redirect:/ceo/employee";
     }
