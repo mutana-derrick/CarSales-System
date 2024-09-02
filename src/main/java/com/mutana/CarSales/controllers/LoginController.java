@@ -8,7 +8,12 @@ public class LoginController {
 
     @GetMapping("/")
     public String welcomeLogin() {
-        return "login"; // This will render the login.html template
+        return "login";
+    }
+
+    @GetMapping("/forgotpassword")
+    public String forgotPassword() {
+        return "forgotpassword";
     }
 
 }

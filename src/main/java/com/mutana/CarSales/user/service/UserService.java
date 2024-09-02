@@ -5,6 +5,7 @@ import com.mutana.CarSales.user.model.Role;
 import com.mutana.CarSales.user.model.UserModel;
 import com.mutana.CarSales.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +21,18 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public UserModel findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
     public Optional<UserModel> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+    public void updateUser(UserModel user) {
+        userRepository.save(user);
+    }
+
 
     public Optional<UserModel> getUserById(Long id) {
         return userRepository.findById(id);

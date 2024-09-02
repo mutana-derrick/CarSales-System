@@ -15,7 +15,9 @@ import com.mutana.CarSales.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -148,8 +150,42 @@ public class AdminController {
     }
 
     @GetMapping("/ceo/profile")
-    public String adminProfile() {
+    public String adminProfile(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+        // Assuming the UserModel is fetched based on the username
+        UserModel user = userService.findByUsername(currentUser.getUsername());
+
+        // Add the user to the model to pre-fill the form fields
+        model.addAttribute("user", user);
+
         return "ceo/profile";
     }
+
+    @PostMapping("/ceo/managecredentials")
+    public String updateCredentials(@ModelAttribute("user") UserModel updatedUser, RedirectAttributes redirectAttributes) {
+        // Fetch the existing user details from the database
+        UserModel existingUser = userService.getUserByIdOrThrow(updatedUser.getUserId());
+
+        // Update the username
+        existingUser.setUsername(updatedUser.getUsername());
+
+        // If the password field is not empty, update the password
+        if (!updatedUser.getPassword().isEmpty()) {
+            // Encrypt the new password before saving it
+            String encryptedPassword = passwordEncoder.encode(updatedUser.getPassword());
+            existingUser.setPassword(encryptedPassword);
+        }
+
+        // Update the modified time
+        existingUser.setModifiedAt(LocalDateTime.now());
+
+        // Save the updated user details
+        userService.updateUser(existingUser);
+
+        redirectAttributes.addFlashAttribute("message", "Credentials updated successfully. Please log in with your new credentials.");
+        return "redirect:/";
+    }
+
+
+
 }
 

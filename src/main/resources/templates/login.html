@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login | CarSales </title>
+    <title>Login | CarSales</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Add Bootstrap CSS -->
@@ -13,33 +13,21 @@
         form { display: flex; flex-direction: column; margin-top: 1rem; }
         input { margin-bottom: 1rem; padding: 0.5rem; }
         button { padding: 0.5rem; background-color: #007bff; color: white; border: none; cursor: pointer; }
-        .alert-container {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            animation: fadeIn 0.5s ease-in-out;
-            padding-right: 10px; /* Add padding to make space for the border */
-        }
-        .alert {
-            position: relative;
-            padding-right: 40px; /* Adjust padding to make space for the border */
-            border-right: 5px solid; /* Set the border width */
-            border-right-color: currentColor; /* Match the border color with the alert color */
-            box-sizing: border-box; /* Ensure the border is included in the element's dimensions */
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-10px); }
-        }
-        .alert.fade-out {
-            animation: fadeOut 0.5s ease-in-out;
-        }
+        .alert-container { position: fixed; top: 20px; right: 20px; z-index: 9999; animation: fadeIn 0.5s ease-in-out; padding-right: 10px; }
+        .alert { position: relative; padding-right: 40px; border-right: 5px solid; border-right-color: currentColor; box-sizing: border-box; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-10px); } }
+        .alert.fade-out { animation: fadeOut 0.5s ease-in-out; }
         .error { color: red; margin-bottom: 1rem; }
+        .forgot-password {
+            align-self: flex-end;
+            margin-bottom: 1rem;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -60,11 +48,19 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+        <!-- show the success message -->
+        <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span th:text="${message}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
     </div>
 
     <form th:action="@{/login}" method="post">
         <input type="text" name="username" placeholder="Username" required autofocus>
         <input type="password" name="password" placeholder="Password" required>
+        <a href="/forgotpassword" class="forgot-password">Forgot Password?</a>
         <button type="submit">Log in</button>
     </form>
 </div>
