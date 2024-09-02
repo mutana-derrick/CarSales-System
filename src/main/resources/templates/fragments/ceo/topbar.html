@@ -19,7 +19,7 @@
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="/ceo/users">System Users</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href="/logout">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -27,3 +27,8 @@
         </div>
     </div>
 </div>
+
+<!--<a class="dropdown-item" href="#" onclick="document.getElementById('logoutForm').submit();">Logout</a>&ndash;&gt;-->
+<!--<form id="logoutForm" th:action="@{/logout}" method="post" style="display: none;">-->
+<!--    <input type="text" name="_csrf" th:value="${_csrf.token}" />-->
+<!--</form>-->

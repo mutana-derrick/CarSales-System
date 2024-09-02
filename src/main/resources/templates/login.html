@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login | CarSales</title>
+    <title>Login | CarSales </title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Add Bootstrap CSS -->
@@ -36,6 +36,13 @@
     <p><b>Log in to access the system.</b></p>
 
     <div class="alert-container">
+        <!-- Show the success message -->
+        <div th:if="${param.logout}" class="alert alert-success alert-dismissible fade show" role="alert">
+            <span>Logged out successfully.</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div th:if="${param.error}" class="alert alert-danger alert-dismissible fade show" role="alert">
             Invalid username or password.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -44,13 +51,6 @@
         </div>
         <div th:if="${param.logout}" class="alert alert-success alert-dismissible fade show" role="alert">
             You have been logged out.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <!-- show the success message -->
-        <div th:if="${message}" class="alert alert-success alert-dismissible fade show" role="alert">
-            <span th:text="${message}"></span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
