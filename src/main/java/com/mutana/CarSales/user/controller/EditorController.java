@@ -8,6 +8,31 @@ public class EditorController {
 
     @GetMapping("/manager/dashboard")
     public String editorDashboard() {
-        return "manager/dashboard"; // This will render manager/dashboard.html
+        return "manager/dashboard";
+    }
+
+    @GetMapping("/manager/profile")
+    public String profile() {
+        return "manager/profile";
+    }
+
+    @GetMapping("/manager/cars")
+    public String viewCars() {
+        return "manager/cars";
+    }
+
+    @GetMapping("/manager/customers")
+    public String viewCustomers() {
+        return "manager/customers";
+    }
+
+    @GetMapping("/manager/sales")
+    public String viewSales() {
+        return "manager/sales";
+    }
+
+    @GetMapping("/manager/report")
+    public String generateReport() {
+        return "manager/report";
     }
 }

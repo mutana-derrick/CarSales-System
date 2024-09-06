@@ -1,0 +1,105 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml" lang="en">
+<div th:fragment="navbar">
+    <nav class="col-md-2 d-none d-md-block sidebar shadow position-fixed vh-100">
+        <div class="sidebar-sticky">
+            <ul class="nav flex-column mt-2 mb-5">
+                <!-- Dashboard -->
+                <li class="nav-item" style="border-bottom:none; color:white;">
+                    <a class="nav-link" href="/manager/dashboard">
+                        Dashboard
+                    </a>
+                </li>
+
+                <!-- Cars Menu -->
+                <li class="nav-item mt-5">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#institutionsMenu" role="button" aria-expanded="false" aria-controls="institutionsMenu">
+                        <span>Cars</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="institutionsMenu">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/manager/cars">View</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- Sales Menu -->
+                <li class="nav-item mt-3">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#lecturesMenu" role="button" aria-expanded="false" aria-controls="lecturesMenu">
+                        <span>Sales</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="lecturesMenu">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/manager/sales">View</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+
+                <!-- Customer Menu -->
+                <li class="nav-item mt-3 mb-5">
+                    <a class="nav-link d-flex justify-content-between align-items-center" data-toggle="collapse" href="#coursesMenu" role="button" aria-expanded="false" aria-controls="coursesMenu">
+                        <span>Customers</span>
+                        <i class="fa fa-chevron-down"></i>
+                    </a>
+                    <div class="collapse" id="coursesMenu">
+                        <ul class="nav flex-column ml-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/manager/customers">View</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+                <!-- Logout -->
+                <li class="nav-item mt-5 shadow-lg"
+                    style="border:1px solid white; border-radius:20px; display: flex; justify-content: center; align-items: center;">
+                    <a class="nav-link" href="/logout">
+                        Logout &nbsp;<i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- JavaScript for Chevron Rotation  -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-item .nav-link');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    const parentNavItem = this.parentElement;
+
+                    // Toggle rotation of the icon
+                    if (icon.style.transform === 'rotate(180deg)') {
+                        icon.style.transform = 'rotate(0deg)';
+                    } else {
+                        icon.style.transform = 'rotate(180deg)';
+                    }
+
+                    // Toggle the selected class on nav link and nav item
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        parentNavItem.classList.remove('selected');
+                    } else {
+                        // Remove 'selected' class from all nav links and nav items
+                        document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('selected'));
+                        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('selected'));
+
+                        // Add 'selected' class to the clicked nav link and nav item
+                        this.classList.add('selected');
+                        parentNavItem.classList.add('selected');
+                    }
+                });
+            });
+        });
+    </script>
+</div>

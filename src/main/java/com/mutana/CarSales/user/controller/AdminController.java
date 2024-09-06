@@ -69,7 +69,6 @@ public class AdminController {
     }
 
 
-
     @GetMapping("/ceo/cars")
     public String getCars(Model model) {
         List<CarModel> cars = carService.getAllCars(); // Fetch car data
@@ -95,10 +94,10 @@ public class AdminController {
     }
 
     @GetMapping("/ceo/employee")
-    public String getEmployee(Model model){
+    public String getEmployee(Model model) {
         List<EmployeeModel> employees = employeeService.getAllEmployees();
         model.addAttribute("employees", employees);
-        model.addAttribute("roles" , Arrays.toString(Role.values()));
+        model.addAttribute("roles", Arrays.toString(Role.values()));
         return "ceo/employee";
     }
 
@@ -106,7 +105,7 @@ public class AdminController {
     public String addEmployee(@ModelAttribute EmployeeModel employee, RedirectAttributes redirectAttributes) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        userService.getUserByUsername(username).ifPresent(User ->{
+        userService.getUserByUsername(username).ifPresent(User -> {
             employee.setCreatedBy(User);
             employee.setCreatedAt(LocalDateTime.now());
             employee.setStatus("Active");
@@ -185,7 +184,10 @@ public class AdminController {
         return "redirect:/";
     }
 
-
+    @GetMapping("/ceo/report")
+    public String viewReport() {
+        return "ceo/report";
+    }
 
 }
 
