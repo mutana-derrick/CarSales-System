@@ -7,7 +7,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ViewerController {
 
     @GetMapping("/salesperson/dashboard")
-    public String viewerDashboard() {
-        return "salesperson/dashboard"; // This will render salesperson/dashboard.html
+    public String salesPersonDashboard() {
+        return "salesperson/dashboard";
+    }
+
+    @GetMapping("/salesperson/profile")
+    public String profile() {
+        return "salesperson/profile";
+    }
+
+    @GetMapping("/salesperson/cars")
+    public String viewCars() {
+        return "salesperson/cars";
+    }
+
+    @GetMapping("/salesperson/customers")
+    public String viewCustomers() {
+        return "salesperson/customers";
+    }
+
+    @GetMapping("/salesperson/sales")
+    public String viewSales() {
+        return "salesperson/sales";
     }
 }
