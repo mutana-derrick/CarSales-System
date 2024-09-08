@@ -30,7 +30,7 @@ body {
     margin-bottom: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-top: 5px solid #0775eb;
+    border-top: 5px solid #02659A;
 }
 
 a {
@@ -47,7 +47,7 @@ li {
 }
 
 .sidebar {
-    background-color: #007bff;
+    background-color:#02659A;
     position: fixed;
     top: 60px;
     left: 0;
@@ -58,7 +58,7 @@ li {
 }
 
 .topbar {
-    background-color: #0775eb;
+    background-color: #02659A;
     position: fixed;
     top: 0;
     left: 0;
@@ -74,7 +74,7 @@ li {
 
 /* Dropdown Button */
 .dropdown .btn {
-    background-color: #0775eb; /* Match the topbar color scheme */
+    background-color: #02659A; /* Match the topbar color scheme */
     border: none;
     color: white;
     padding: 5px 10px;
@@ -82,12 +82,12 @@ li {
 }
 
 .dropdown .btn:hover {
-    background-color: #0056b3; /* Slightly darker on hover */
+    background-color: #015887; /* Slightly darker on hover */
 }
 
 /* Dropdown Menu */
 .dropdown-menu {
-    background-color: #2e93ff; /* Match sidebar color */
+    background-color: #017FC0; /* Match sidebar color */
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Match the shadow style */
     border-radius: 0; /* Remove border-radius to match the sidebar */
@@ -101,7 +101,7 @@ li {
 }
 
 .dropdown-menu .dropdown-item:hover {
-    background-color: #2e93ff; /* Hover effect */
+    background-color: #017FC0; /* Hover effect */
     padding-left: 30px;
 }
 
@@ -115,12 +115,12 @@ li {
 }
 
 .btn-primary {
-    background-color: #007bff;
+    background-color: #02659A;
     border: none;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #014C75;
 }
 
 .nav-link {
@@ -135,13 +135,13 @@ li {
 
 .nav-link.active,
 .nav-link.selected {
-    background-color: #2e93ff;
+    background-color: #017FC0;
     color: white;
 }
 
 .nav-item.active,
 .nav-item.selected {
-    background-color: #2e93ff;
+    background-color: #017FC0;
 }
 
 /* Style for nested nav items */
@@ -151,7 +151,7 @@ li {
 }
 
 .sidebar .collapse .nav-link:hover {
-    background-color: #2e93ff;
+    background-color: #017FC0;
     padding-left: 30px;
 }
 
