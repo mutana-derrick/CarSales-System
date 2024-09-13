@@ -18,5 +18,10 @@ public class CarService {
     public void saveCar(CarModel car) {
         carRepository.save(car);
     }
+
+    // Method to get all available cars in stock
+    public List<CarModel> getAvailableCars() {
+        return carRepository.findAvailableCars();
+    }
 }
 

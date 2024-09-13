@@ -8,12 +8,13 @@ import com.mutana.CarSales.category.CategoryService;
 import com.mutana.CarSales.employee.EmployeeModel;
 import com.mutana.CarSales.employee.EmployeeRepository;
 import com.mutana.CarSales.employee.EmployeeService;
+import com.mutana.CarSales.report.ReportModel;
+import com.mutana.CarSales.report.ReportService;
 import com.mutana.CarSales.user.model.Role;
 import com.mutana.CarSales.user.model.UserModel;
 import com.mutana.CarSales.user.repository.UserRepository;
 import com.mutana.CarSales.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,10 +22,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
@@ -47,6 +45,8 @@ public class AdminController {
     private UserRepository userRepository;
     @Autowired
     private EmployeeRepository employeeRepository; // To fetch the EmployeeModel
+    @Autowired
+    private ReportService reportService;
     @Autowired
     private PasswordEncoder passwordEncoder; // For encoding the password
 
@@ -185,9 +185,15 @@ public class AdminController {
     }
 
     @GetMapping("/ceo/report")
-    public String viewReport() {
+    public String viewReport(Model model) {
+        model.addAttribute("reports", reportService.getAllReports());
         return "ceo/report";
     }
 
+    @GetMapping("/ceo/viewreport/{id}")
+    public String viewReportDetails(@PathVariable Long id, Model model) {
+        model.addAttribute("report", reportService.getReportById(id));
+        return "ceo/report-details";
+    }
 }
 

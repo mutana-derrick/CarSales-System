@@ -57,27 +57,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- Sample Data for Existing Reports -->
-                            <tr>
-                                <td>1</td>
-                                <td>Sales Report Q1</td>
-                                <td>Overview of sales in the first quarter of 2023.</td>
-                                <td>2023-03-31</td>
+                            <tr th:each="report : ${reports}">
+                                <td th:text="${report.id}"></td>
+                                <td th:text="${report.reportTitle}"></td>
+                                <td th:text="${report.reportDescription}"></td>
+                                <td th:text="${#temporals.format(report.createdAt, 'yyyy-MM-dd')}"></td>
                                 <td>
-                                    <button class="btn btn-success">
+                                    <a th:href="@{/ceo/viewreport/{id}(id=${report.id})}" class="btn btn-success">
                                         <i class="fa-solid fa-eye"></i> View
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Annual Revenue Report</td>
-                                <td>Summary of total revenue for the year 2022.</td>
-                                <td>2022-12-31</td>
-                                <td>
-                                    <button class="btn btn-success">
-                                        <i class="fa-solid fa-eye"></i> View
-                                    </button>
+                                    </a>
                                 </td>
                             </tr>
                             </tbody>
