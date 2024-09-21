@@ -16,4 +16,6 @@ public interface CustomerRepository extends JpaRepository<CustomerModel, Long> {
 
     @Query("SELECT COUNT(c) FROM CustomerModel c WHERE c.createdAt BETWEEN :startDate AND :endDate")
     long countNewCustomersByDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    List<CustomerModel> findByNameContainingIgnoreCase(String name);
 }

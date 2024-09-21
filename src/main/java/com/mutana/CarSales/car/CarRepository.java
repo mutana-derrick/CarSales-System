@@ -1,6 +1,5 @@
 package com.mutana.CarSales.car;
 
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -18,6 +17,6 @@ public interface CarRepository extends JpaRepository<CarModel, Long> {
     @Query("SELECT COUNT(c) FROM CarModel c WHERE c.stockStatus = 'Available'")
     long countAvailableCars();
 
-
+    List<CarModel> findByModelContainingIgnoreCase(String model);
 }
 

@@ -48,9 +48,10 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h2>All Customers</h2>
                             <div class="d-flex">
-                                <button class="btn btn-primary shadow me-2" data-bs-toggle="modal"
-                                        data-bs-target="#addCarModal">Add A Customer
+                                <button class="btn btn-primary shadow me-2" data-bs-toggle="modal" data-bs-target="#addCustomerModal">
+                                    Add A Customer
                                 </button>
+
                             </div>
                         </div>
 
@@ -66,54 +67,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>johndoe@example.com</td>
-                                <td>+123456789</td>
-                                <td>123 Main St, Springfield</td>
+                            <tr th:each="customer : ${customers}">
+                                <td th:text="${customer.customerId}">1</td>
+                                <td th:text="${customer.name}">John Doe</td>
+                                <td th:text="${customer.email}">johndoe@example.com</td>
+                                <td th:text="${customer.phone}">+123456789</td>
+                                <td th:text="${customer.address}">123 Main St, Springfield</td>
                                 <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jane Smith</td>
-                                <td>janesmith@example.com</td>
-                                <td>+987654321</td>
-                                <td>456 Elm St, Metropolis</td>
-                                <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Michael Brown</td>
-                                <td>michaelb@example.com</td>
-                                <td>+112233445</td>
-                                <td>789 Oak St, Gotham</td>
-                                <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Emily White</td>
-                                <td>emilywhite@example.com</td>
-                                <td>+445566778</td>
-                                <td>101 Maple St, Star City</td>
-                                <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Chris Green</td>
-                                <td>chrisgreen@example.com</td>
-                                <td>+998877665</td>
-                                <td>202 Birch St, Central City</td>
-                                <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
+                                    <button class="btn btn-success">
+                                        <i class="fa-solid fa-user-pen"></i>
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -126,7 +89,7 @@
 </div>
 
 <!-- include Models -->
-<div th:include="fragments/ceo/models :: models"></div>
+<div th:include="fragments/manager/models :: models"></div>
 
 <!-- Bootstrap JS and cdns -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

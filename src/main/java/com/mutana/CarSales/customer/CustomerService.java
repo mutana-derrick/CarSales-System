@@ -37,4 +37,8 @@ public class CustomerService {
         // Assuming there is a method in CustomerRepository to fetch new customers by date range
         return customerRepository.findNewCustomersByDateRange(startDate, endDate);
     }
+
+    public List<CustomerModel> findByNameContaining(String query) {
+        return customerRepository.findByNameContainingIgnoreCase(query);
+    }
 }

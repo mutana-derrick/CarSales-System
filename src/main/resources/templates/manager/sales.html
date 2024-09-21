@@ -48,9 +48,11 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h2>Sales Made</h2>
                             <div class="d-flex">
-                                <button class="btn btn-primary shadow me-2" data-bs-toggle="modal"
-                                        data-bs-target="#addCarModal">Record  A Sale
-                                </button>
+                                <a href="recordSales" class="btn btn-primary shadow me-2">
+                                    Record A Sale
+                                </a>
+
+
                             </div>
                         </div>
 
@@ -68,69 +70,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>2024-09-01</td>
-                                <td>SalesPerson</td>
-                                <td>Toyota</td>
-                                <td>John</td>
-                                <td>25000.00</td>
-                                <td>Credit Card</td>
+                            <tr th:each="sale : ${sales}">
+                                <td th:text="${sale.saleId}"></td>
+                                <td th:text="${sale.saleDate}"></td>
+                                <td th:text="${sale.salesperson != null ? sale.salesperson.name : 'No Salesperson Assigned'}"></td>
+                                <td th:text="${sale.car.model}"></td>
+                                <td th:text="${sale.customer.name}"></td>
+                                <td th:text="${sale.salePrice}"></td>
+                                <td th:text="${sale.paymentMethod}"></td>
                                 <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>2024-09-01</td>
-                                <td>SalesPerson</td>
-                                <td>Toyota</td>
-                                <td>John</td>
-                                <td>25000.00</td>
-                                <td>Credit Card</td>
-                                <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>2024-09-01</td>
-                                <td>SalesPerson</td>
-                                <td>Toyota</td>
-                                <td>John</td>
-                                <td>25000.00</td>
-                                <td>Credit Card</td>
-                                <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>2024-09-01</td>
-                                <td>SalesPerson</td>
-                                <td>Toyota</td>
-                                <td>John</td>
-                                <td>25000.00</td>
-                                <td>Credit Card</td>
-                                <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>2024-09-01</td>
-                                <td>SalesPerson</td>
-                                <td>Toyota</td>
-                                <td>John</td>
-                                <td>25000.00</td>
-                                <td>Credit Card</td>
-                                <td>
-                                    <button class="btn btn-success"> <i class="fa-solid fa-user-pen"></i> </button>
+                                    <button class="btn btn-success">
+                                        <i class="fa-solid fa-user-pen"></i>
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
@@ -139,7 +94,7 @@
 </div>
 
 <!-- include Models -->
-<div th:include="fragments/ceo/models :: models"></div>
+<div th:include="fragments/manager/models :: models"></div>
 
 <!-- Bootstrap JS and cdns -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -153,7 +108,6 @@
 <script src="//cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
 <script src="//cdn.datatables.net/responsive/3.0.0/js/dataTables.responsive.js"></script>
 <script src="//cdn.datatables.net/responsive/3.0.0/js/responsive.bootstrap5.js"></script>
-
 <!-- data table script -->
 <script>
     DataTable.defaults.responsive = true;
