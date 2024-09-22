@@ -8,7 +8,9 @@ import java.util.List;
 
 @Repository
 public interface CarRepository extends JpaRepository<CarModel, Long> {
+
     long count();
+
     List<CarModel> findTop3ByOrderByCreatedAtDesc();
 
     @Query("SELECT c FROM CarModel c WHERE c.stockStatus = 'Available'")
@@ -18,5 +20,7 @@ public interface CarRepository extends JpaRepository<CarModel, Long> {
     long countAvailableCars();
 
     List<CarModel> findByModelContainingIgnoreCase(String model);
-}
 
+    // Method to find cars by model and stock status
+    List<CarModel> findByModelContainingAndStockStatusIgnoreCase(String model, String stockStatus);
+}

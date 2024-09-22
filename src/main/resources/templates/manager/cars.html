@@ -62,65 +62,17 @@
                                 <th>Year</th>
                                 <th>Price</th>
                                 <th>Stock Status</th>
-                                <th>Modify</th> <!-- Added column for Edit button -->
+                                <th>Modify</th> <!-- Column for Edit button -->
                             </tr>
                             </thead>
                             <tbody>
-                            <!-- Static Sample Data Rows -->
-                            <tr>
-                                <td>1</td>
-                                <td>Toyota Corolla</td>
-                                <td>2021</td>
-                                <td>$20,000</td>
-                                <td>In Stock</td>
-                                <td>
-                                    <button class="btn btn-success">
-                                        <i class="fa-solid fa-user-pen"></i> Edit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Honda Civic</td>
-                                <td>2020</td>
-                                <td>$18,000</td>
-                                <td>Out of Stock</td>
-                                <td>
-                                    <button class="btn btn-success">
-                                        <i class="fa-solid fa-user-pen"></i> Edit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Ford Mustang</td>
-                                <td>2022</td>
-                                <td>$35,000</td>
-                                <td>In Stock</td>
-                                <td>
-                                    <button class="btn btn-success">
-                                        <i class="fa-solid fa-user-pen"></i> Edit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Chevrolet Malibu</td>
-                                <td>2019</td>
-                                <td>$15,000</td>
-                                <td>Out of Stock</td>
-                                <td>
-                                    <button class="btn btn-success">
-                                        <i class="fa-solid fa-user-pen"></i> Edit
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>BMW X5</td>
-                                <td>2021</td>
-                                <td>$50,000</td>
-                                <td>In Stock</td>
+                            <!-- Loop through the list of cars and display each one in a row -->
+                            <tr th:each="car : ${cars}">
+                                <td th:text="${car.carId}"></td>
+                                <td th:text="${car.model}"></td>
+                                <td th:text="${car.year}"></td>
+                                <td th:text="${car.price}"></td>
+                                <td th:text="${car.stockStatus eq 'Available' ? 'In Stock' : 'Out of Stock'}"></td>
                                 <td>
                                     <button class="btn btn-success">
                                         <i class="fa-solid fa-user-pen"></i> Edit
@@ -129,7 +81,6 @@
                             </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>

@@ -165,7 +165,7 @@ li {
 
 .suggestion-box {
     position: absolute; /* Position it below the input field */
-    width: 50%; /* Ensure it matches the width of the input field */
+    width: 97%; /* Ensure it matches the width of the input field */
     background-color: white; /* Set background to white */
     border: 1px solid #ddd; /* Light border to separate from the input field */
     border-radius: 4px; /* Slight rounding on corners */
@@ -185,18 +185,6 @@ li {
 .car-item:hover {
     background-color: #f0f0f0; /* Light grey background on hover */
     color: #007bff; /* Optional: Change text color on hover */
-}
-
-#customerSuggestions{
-    position: absolute; /* Position it below the input field */
-    width: 50%; /* Ensure it matches the width of the input field */
-    background-color: white; /* Set background to white */
-    border: 1px solid #ddd; /* Light border to separate from the input field */
-    border-radius: 4px; /* Slight rounding on corners */
-    max-height: 200px; /* Limit height with scroll */
-    overflow-y: auto; /* Enable vertical scroll if too many suggestions */
-    z-index: 1000; /* Ensure it's above other elements */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
 .customer-item {

@@ -68,9 +68,12 @@ public class EditorController {
     }
 
     @GetMapping("/manager/cars")
-    public String viewCars() {
+    public String viewCars(Model model) {
+        List<CarModel> cars = carService.getAllCars();
+        model.addAttribute("cars", cars);
         return "manager/cars";
     }
+
 
     @GetMapping("/manager/customers")
     public String viewCustomers(Model model) {
@@ -103,10 +106,17 @@ public class EditorController {
         return "manager/sales";
     }
 
-    // Search cars by name (AJAX)
+    @GetMapping("/manager/recordSales")
+    public String recordSales(){
+        return"manager/recordsales";
+    }
+
+    // Search cars by name (AJAX) and only include cars with 'In Stock' status
     @GetMapping("/manager/searchCars")
     public ResponseEntity<String> searchCars(@RequestParam("query") String query) {
-        List<CarModel> cars = carService.findByModelContaining(query);  // Implement search method in service
+        // Modify the service call to fetch only cars that are available (stock status 'Available')
+        List<CarModel> cars = carService.findAvailableCarsByModel(query);
+
         StringBuilder suggestions = new StringBuilder();
         for (CarModel car : cars) {
             suggestions.append("<div class='car-item' data-id='").append(car.getCarId()).append("'>")
@@ -114,6 +124,19 @@ public class EditorController {
         }
         return new ResponseEntity<>(suggestions.toString(), HttpStatus.OK);
     }
+
+
+    @GetMapping("/manager/getCarDetails")
+    public ResponseEntity<Map<String, Object>> getCarDetails(@RequestParam("carId") Long carId) {
+        Optional<CarModel> car = carService.getCarById(carId);
+        if (car.isPresent()) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("manufacturingYear", car.get().getYear());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
 
     // Search customers by name (AJAX)
     @GetMapping("/manager/searchCustomers")
@@ -125,11 +148,6 @@ public class EditorController {
                     .append(customer.getName()).append("</div>");
         }
         return new ResponseEntity<>(suggestions.toString(), HttpStatus.OK);
-    }
-
-    @GetMapping("/manager/recordSales")
-    public String recordSales(){
-        return"manager/recordsales";
     }
 
 
@@ -149,8 +167,10 @@ public class EditorController {
 
         // Ensure both car and customer exist
         if (car.isPresent() && customer.isPresent()) {
+            CarModel selectedCar = car.get();
+
             // Set the car and customer in the SalesModel
-            sale.setCar(car.get());
+            sale.setCar(selectedCar);
             sale.setCustomer(customer.get());
 
             // Fetch and set the current user as the creator
@@ -162,6 +182,10 @@ public class EditorController {
                 // Save the sale
                 salesService.saveSale(sale);
             });
+
+            // Update car status to 'Sold'
+            selectedCar.setStockStatus("Sold");
+            carService.updateCar(selectedCar);  // Save the updated car
 
             redirectAttributes.addFlashAttribute("message", "Sale recorded successfully!");
         } else {

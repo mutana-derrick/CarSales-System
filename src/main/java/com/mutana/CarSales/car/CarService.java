@@ -10,28 +10,42 @@ import java.util.Optional;
 public class CarService {
 
     @Autowired
-    private CarRepository carRepository; // Inject the repository
+    private CarRepository carRepository;
 
+    // Fetch a car by its ID
     public Optional<CarModel> getCarById(Long carId) {
         return carRepository.findById(carId);
     }
 
+    // Fetch all cars from the database
     public List<CarModel> getAllCars() {
-        return carRepository.findAll(); // Fetch all cars from the database
+        return carRepository.findAll();
     }
 
+    // Save or update a car
     public void saveCar(CarModel car) {
         carRepository.save(car);
     }
 
-    // Method to get all available cars in stock
+    // Get all available cars in stock
     public List<CarModel> getAvailableCars() {
         return carRepository.findAvailableCars();
     }
 
+    // Search for cars by model (ignoring case)
     public List<CarModel> findByModelContaining(String query) {
-        // Call the repository method to search for cars by name
         return carRepository.findByModelContainingIgnoreCase(query);
     }
+
+    // Update a car using the save method (acts as both insert and update)
+    public void updateCar(CarModel car) {
+        carRepository.save(car);
+    }
+
+    // Method to fetch available cars that match the query
+    public List<CarModel> findAvailableCarsByModel(String query) {
+        return carRepository.findByModelContainingAndStockStatusIgnoreCase(query, "Available");
+    }
 }
+
 

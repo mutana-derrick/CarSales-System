@@ -39,8 +39,6 @@
         <!-- Side Bar -->
         <div th:include="fragments/manager/navbar :: navbar"></div>
         <!-- Main Content -->
-
-        <!-- Main Content -->
         <main role="main" class="content-wrapper col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="dashboard-container">
             <h2>Sales Record</h2>
@@ -62,6 +60,11 @@
                             <input type="text" class="form-control" id="car" required autocomplete="off">
                             <input type="hidden" id="carId" name="carId">
                             <div id="carSuggestions" class="autocomplete-suggestions suggestion-box"></div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="manufacturingYear" class="form-label">Manufacturing Year:</label>
+                            <input type="text" class="form-control" id="manufacturingYear" name="manufacturingYear" readonly>
                         </div>
 
                         <div class="mb-3">
@@ -115,11 +118,22 @@
             }
         });
 
-        // Select car from suggestions
+        // Select car from suggestions and fetch manufacturing date
         $(document).on('click', '.car-item', function () {
+            let carId = $(this).data('id');
             $('#car').val($(this).text());
-            $('#carId').val($(this).data('id'));
+            $('#carId').val(carId);
             $('#carSuggestions').fadeOut();
+
+            // Fetch manufacturing date
+            $.ajax({
+                url: '/manager/getCarDetails', // Create a new endpoint
+                method: 'GET',
+                data: {carId: carId},
+                success: function (data) {
+                    $('#manufacturingYear').val(data.manufacturingYear); // Populate the year field
+                }
+            });
         });
 
         // Autocomplete for Customers
@@ -147,6 +161,7 @@
             $('#customerSuggestions').fadeOut();
         });
     });
+
 </script>
 
 </body>
