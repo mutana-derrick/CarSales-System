@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-
 @Entity
 @Data
 @NoArgsConstructor
@@ -24,10 +23,22 @@ public class ReportModel {
     private String reportDescription;
 
     @Column(name = "available_cars")
-    private long availableCars;
+    private Long availableCars; // Changed from long to Long
+
+    @Column(name = "sold_cars")
+    private Long soldCars; // Changed from long to Long
 
     @Column(name = "new_customers")
-    private long newCustomers;
+    private Long newCustomers; // Changed from long to Long
+
+    @Column(name = "total_sales")
+    private Double totalSales; // Changed from double to Double
+
+    @Column(name = "total_profit")
+    private Double totalProfit; // Changed from double to Double
+
+    @Column(name = "top_selling_model")
+    private String topSellingModel;
 
     private LocalDateTime startDate;
     private LocalDateTime endDate;

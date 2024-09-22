@@ -18,9 +18,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.1/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/3.0.0/css/responsive.bootstrap5.css">
 
-    <!--    external css-->
+    <!-- external css -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/salesperson/style.css}">
-
 </head>
 <body>
 <div class="container-fluid">
@@ -87,6 +86,12 @@
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Date Created</th>
+                                <th>Available Cars</th>
+                                <th>Sold Cars</th>
+                                <th>New Customers</th>
+                                <th>Total Sales</th>
+                                <th>Total Profit</th>
+                                <th>Top Selling Model</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -96,6 +101,12 @@
                                 <td th:text="${report.reportTitle}"></td>
                                 <td th:text="${report.reportDescription}"></td>
                                 <td th:text="${#temporals.format(report.createdAt, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${report.availableCars}"></td>
+                                <td th:text="${report.soldCars}"></td>
+                                <td th:text="${report.newCustomers}"></td>
+                                <td th:text="${#numbers.formatDecimal(report.totalSales, 1, 2)}"></td>
+                                <td th:text="${#numbers.formatDecimal(report.totalProfit, 1, 2)}"></td>
+                                <td th:text="${report.topSellingModel}"></td>
                                 <td>
                                     <a th:href="@{/manager/viewreport/{id}(id=${report.id})}" class="btn btn-sm btn-success">
                                         <i class="fa-solid fa-eye"></i> View
@@ -127,7 +138,7 @@
 <!-- data table script -->
 <script>
     DataTable.defaults.responsive = true;
-    new DataTable('#example');
+    new DataTable('#reportsTable');
 </script>
 </body>
 </html>

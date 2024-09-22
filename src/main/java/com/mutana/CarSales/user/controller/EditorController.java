@@ -8,6 +8,7 @@ import com.mutana.CarSales.customer.CustomerModel;
 import com.mutana.CarSales.customer.CustomerRepository;
 import com.mutana.CarSales.customer.CustomerService;
 import com.mutana.CarSales.report.ReportModel;
+import com.mutana.CarSales.report.ReportRepository;
 import com.mutana.CarSales.report.ReportService;
 import com.mutana.CarSales.sales.SalesModel;
 import com.mutana.CarSales.sales.SalesRepository;
@@ -54,6 +55,8 @@ public class EditorController {
     private CarService carService;
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private ReportRepository reportRepository;
 
 
 
@@ -212,12 +215,13 @@ public class EditorController {
 
 
     @PostMapping("/manager/generatereport")
-    public String generateReport(@ModelAttribute("reportTitle") String reportTitle,
-                                 @ModelAttribute("reportDescription") String reportDescription,
-                                 @ModelAttribute("startDate") String startDateStr,
-                                 @ModelAttribute("endDate") String endDateStr,
-                                 @AuthenticationPrincipal UserDetails userDetails,
-                                 RedirectAttributes redirectAttributes) {
+    public String generateReport(
+            @ModelAttribute("reportTitle") String reportTitle,
+            @ModelAttribute("reportDescription") String reportDescription,
+            @ModelAttribute("startDate") String startDateStr,
+            @ModelAttribute("endDate") String endDateStr,
+            @AuthenticationPrincipal UserDetails userDetails,
+            RedirectAttributes redirectAttributes) {
 
         LocalDateTime startDate = LocalDate.parse(startDateStr).atStartOfDay();
         LocalDateTime endDate = LocalDate.parse(endDateStr).atTime(LocalTime.MAX);
@@ -225,9 +229,13 @@ public class EditorController {
         UserModel manager = userService.getUserModelFromUserDetails(userDetails);
         ReportModel report = reportService.generateReport(reportTitle, reportDescription, startDate, endDate, manager);
 
-        redirectAttributes.addFlashAttribute("message", "Report generated successfully!");
+        reportRepository.save(report);
+
+
+        redirectAttributes.addFlashAttribute("message", "Comprehensive report generated successfully!");
         redirectAttributes.addFlashAttribute("report", report);
 
         return "redirect:/manager/report";
     }
+
 }
