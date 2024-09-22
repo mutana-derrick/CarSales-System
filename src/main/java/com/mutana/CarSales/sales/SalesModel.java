@@ -33,7 +33,7 @@ public class SalesModel {
     @JoinColumn(name = "salespersonId")
     private UserModel salesperson;
 
-    private LocalDateTime saleDate;
+    private LocalDate saleDate;
     private double salePrice;
     private String paymentMethod;
 

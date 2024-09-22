@@ -160,19 +160,27 @@
                                         <td th:text="${report.availableCars}"></td>
                                     </tr>
                                     <tr>
+                                        <td>Sold Cars</td>
+                                        <td th:text="${report.soldCars}"></td>
+                                    </tr>
+                                    <tr>
                                         <td>New Customers</td>
                                         <td th:text="${report.newCustomers}"></td>
                                     </tr>
-                                    <!-- Uncomment when totalSales is available -->
-                                    <!--
                                     <tr>
                                         <td>Total Sales</td>
                                         <td th:text="${#numbers.formatDecimal(report.totalSales, 1, 'COMMA', 2, 'POINT')}"></td>
                                     </tr>
-                                    -->
+                                    <tr>
+                                        <td>Total Profit</td>
+                                        <td th:text="${#numbers.formatDecimal(report.totalProfit, 1, 'COMMA', 2, 'POINT')}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Top Selling Model</td>
+                                        <td th:text="${report.topSellingModel}"></td>
+                                    </tr>
                                 </table>
                             </div>
-
 
                             <div class="signature">
                                 <p>Prepared by: <span th:text="${report.manager.username}"></span></p>
@@ -192,9 +200,9 @@
                     <button onclick="printReport()" class="btn btn-primary">
                         <i class="fas fa-print"></i> Print Report
                     </button>
-<!--                    <button onclick="savePDF()" class="btn btn-secondary">-->
-<!--                        <i class="fas fa-file-pdf"></i> Save as PDF-->
-<!--                    </button>-->
+                    <button onclick="savePDF()" class="btn btn-secondary">
+                        <i class="fas fa-file-pdf"></i> Save as PDF
+                    </button>
                 </div>
             </div>
         </main>
