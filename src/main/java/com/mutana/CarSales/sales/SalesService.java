@@ -1,10 +1,10 @@
 package com.mutana.CarSales.sales;
 
+import com.mutana.CarSales.user.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -36,5 +36,9 @@ public class SalesService {
     public List<SalesModel> getSalesByDateRange(LocalDateTime startDate, LocalDateTime endDate) {
         // Assuming there is a method in SalesRepository to fetch sales by date range
         return salesRepository.findSalesByDateRange(startDate, endDate);
+    }
+
+    public List<SalesModel> getSalesBySalesperson(UserModel salesperson) {
+        return salesRepository.findBySalesperson(salesperson);
     }
 }

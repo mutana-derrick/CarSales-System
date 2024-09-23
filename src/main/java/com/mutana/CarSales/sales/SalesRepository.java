@@ -1,5 +1,7 @@
 package com.mutana.CarSales.sales;
 
+import com.mutana.CarSales.employee.EmployeeModel;
+import com.mutana.CarSales.user.model.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,6 @@ public interface SalesRepository extends JpaRepository<SalesModel, Long> {
 
     @Query("SELECT COUNT(s) FROM SalesModel s WHERE s.createdAt BETWEEN :startDate AND :endDate")
     Long countSalesInDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    List<SalesModel> findBySalesperson(UserModel salesperson);
 }

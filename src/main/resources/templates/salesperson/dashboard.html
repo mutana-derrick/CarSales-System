@@ -43,13 +43,13 @@
                                 <p>Total Cars in Store: <span th:text="${totalCars}"></span></p>
                                 <p>Recent Cars:</p>
                                 <ul>
-                                    <li th:each="car : ${recentCars}"
-                                        th:text="${car.model} + ' (' + ${car.year} + ')'"></li>
+                                    <li th:each="car : ${recentCars}" th:text="${car.model} + ' (' + ${car.year} + ')'"></li>
                                 </ul>
                                 <a href="/salesperson/cars" class="btn btn-primary">View All Cars</a>
                             </div>
                         </div>
                     </div>
+
                     <!-- Customers Card -->
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card shadow">
@@ -57,13 +57,16 @@
                                 Customers <i class="fa-solid fa-users"></i>
                             </div>
                             <div class="card-body">
-                                <p>Total Customers available:</p>
+                                <p>Total Customers available: <span th:text="${totalCustomers}"></span></p>
                                 <p>Recently Gained Customers:</p>
-                                <ul></ul>
+                                <ul>
+                                    <li th:each="customer : ${recentCustomers}" th:text="${customer.name}"></li>
+                                </ul>
                                 <a href="/salesperson/customers" class="btn btn-primary">View All Customers</a>
                             </div>
                         </div>
                     </div>
+
                     <!-- Sales Card  -->
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card shadow">
@@ -71,9 +74,12 @@
                                 Sales <i class="fa-solid fa-money-bill-transfer"></i>
                             </div>
                             <div class="card-body">
-                                <p>Total Sales Made: ...</p>
-                                <p>Recently Made Sales: ...</p>
-                                <ul></ul>
+                                <p th:if="${totalSales != null}">Total Sales Made: <span th:text="${totalSales}"></span></p>
+                                <p th:if="${totalSales != null}">Recently Made Sales:</p>
+                                <ul th:if="${totalSales != null}">
+                                    <li th:each="sale : ${recentSales}" th:text="${sale.car.model} + ' - ' + ${#temporals.format(sale.saleDate, 'dd-MM-yyyy')}"></li>
+                                </ul>
+                                <p th:if="${noSalesMessage != null}" th:text="${noSalesMessage}"></p>
                                 <a href="/salesperson/sales" class="btn btn-primary">View All Sales</a>
                             </div>
                         </div>

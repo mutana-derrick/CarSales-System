@@ -60,40 +60,12 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>johndoe@example.com</td>
-                                <td>+123456789</td>
-                                <td>123 Main St, Springfield</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jane Smith</td>
-                                <td>janesmith@example.com</td>
-                                <td>+987654321</td>
-                                <td>456 Elm St, Metropolis</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Michael Brown</td>
-                                <td>michaelb@example.com</td>
-                                <td>+112233445</td>
-                                <td>789 Oak St, Gotham</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Emily White</td>
-                                <td>emilywhite@example.com</td>
-                                <td>+445566778</td>
-                                <td>101 Maple St, Star City</td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Chris Green</td>
-                                <td>chrisgreen@example.com</td>
-                                <td>+998877665</td>
-                                <td>202 Birch St, Central City</td>
+                            <tr th:each="customer : ${customers}">
+                                <td th:text="${customer.customerId}"></td>
+                                <td th:text="${customer.name}"></td>
+                                <td th:text="${customer.email}"></td>
+                                <td th:text="${customer.phone}"></td>
+                                <td th:text="${customer.address}"></td>
                             </tr>
                             </tbody>
                         </table>
