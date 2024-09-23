@@ -60,14 +60,31 @@ public class EditorController {
 
 
 
-    @GetMapping("/manager/dashboard")
-    public String editorDashboard() {
-        return "manager/dashboard";
-    }
-
     @GetMapping("/manager/profile")
     public String profile() {
         return "manager/profile";
+    }
+
+    @GetMapping("/manager/dashboard")
+    public String managerDashboard(Model model) {
+        // Cars
+        List<CarModel> allCars = carService.getAllCars();
+        model.addAttribute("totalCars", allCars.size());
+        model.addAttribute("recentCars", allCars.subList(0, Math.min(3, allCars.size())));
+
+        // Customers
+        List<CustomerModel> allCustomers = customerService.getAllCustomers();
+        model.addAttribute("totalCustomers", allCustomers.size());
+        LocalDateTime oneMonthAgo = LocalDateTime.now().minusMonths(1);
+        List<CustomerModel> recentCustomers = customerService.getNewCustomersByDateRange(oneMonthAgo, LocalDateTime.now());
+        model.addAttribute("recentCustomers", recentCustomers.subList(0, Math.min(3, recentCustomers.size())));
+
+        // Sales
+        List<SalesModel> allSales = salesService.getAllSales();
+        model.addAttribute("totalSales", allSales.size());
+        model.addAttribute("recentSales", allSales.subList(0, Math.min(3, allSales.size())));
+
+        return "manager/dashboard";
     }
 
     @GetMapping("/manager/cars")

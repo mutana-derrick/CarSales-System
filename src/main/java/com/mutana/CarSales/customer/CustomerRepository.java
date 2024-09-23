@@ -18,4 +18,7 @@ public interface CustomerRepository extends JpaRepository<CustomerModel, Long> {
     long countNewCustomersByDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
     List<CustomerModel> findByNameContainingIgnoreCase(String name);
+
+    long count();
+    List<CustomerModel> findTop3ByOrderByCreatedAtDesc();
 }

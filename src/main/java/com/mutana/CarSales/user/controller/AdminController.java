@@ -5,11 +5,16 @@ import com.mutana.CarSales.car.CarRepository;
 import com.mutana.CarSales.car.CarService;
 import com.mutana.CarSales.category.CategoryModel;
 import com.mutana.CarSales.category.CategoryService;
+import com.mutana.CarSales.customer.CustomerModel;
+import com.mutana.CarSales.customer.CustomerRepository;
+import com.mutana.CarSales.customer.CustomerService;
 import com.mutana.CarSales.employee.EmployeeModel;
 import com.mutana.CarSales.employee.EmployeeRepository;
 import com.mutana.CarSales.employee.EmployeeService;
 import com.mutana.CarSales.report.ReportModel;
 import com.mutana.CarSales.report.ReportService;
+import com.mutana.CarSales.sales.SalesModel;
+import com.mutana.CarSales.sales.SalesRepository;
 import com.mutana.CarSales.user.model.Role;
 import com.mutana.CarSales.user.model.UserModel;
 import com.mutana.CarSales.user.repository.UserRepository;
@@ -42,6 +47,12 @@ public class AdminController {
     @Autowired
     private EmployeeService employeeService;
     @Autowired
+    private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerService customerService;
+    @Autowired
+    private SalesRepository salesRepository;
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private EmployeeRepository employeeRepository; // To fetch the EmployeeModel
@@ -52,18 +63,30 @@ public class AdminController {
 
     @GetMapping("/ceo/dashboard")
     public String adminDashboard(Model model) {
-        // Fetch total number of cars and latest 3 cars
+        // Cars
         long totalCars = carRepository.count();
         List<CarModel> recentCars = carRepository.findTop3ByOrderByCreatedAtDesc();
 
-        // Fetch total number of employees and latest 3 employees
+        // Employees
         long totalEmployees = employeeRepository.count();
         List<EmployeeModel> recentEmployees = employeeRepository.findTop3ByOrderByCreatedAtDesc();
+
+        // Customers
+        long totalCustomers = customerRepository.count();
+        List<CustomerModel> recentCustomers = customerRepository.findTop3ByOrderByCreatedAtDesc();
+
+        // Sales
+        long totalSales = salesRepository.count();
+        List<SalesModel> recentSales = salesRepository.findTop3ByOrderByCreatedAtDesc();
 
         model.addAttribute("totalCars", totalCars);
         model.addAttribute("recentCars", recentCars);
         model.addAttribute("totalEmployees", totalEmployees);
         model.addAttribute("recentEmployees", recentEmployees);
+        model.addAttribute("totalCustomers", totalCustomers);
+        model.addAttribute("recentCustomers", recentCustomers);
+        model.addAttribute("totalSales", totalSales);
+        model.addAttribute("recentSales", recentSales);
 
         return "ceo/dashboard";
     }
@@ -114,6 +137,20 @@ public class AdminController {
 
         redirectAttributes.addFlashAttribute("message", "Employee added successfully!");
         return "redirect:/ceo/employee";
+    }
+
+    @GetMapping("/ceo/sales")
+    public String viewSales(Model model){
+        List<SalesModel> sales = salesRepository.findAll();
+        model.addAttribute("sales", sales);
+        return"ceo/sales";
+    }
+
+    @GetMapping("/ceo/customers")
+    public String viewCustomers(Model model){
+        List<CustomerModel> customers = customerService.getAllCustomers();
+        model.addAttribute("customers", customers);
+        return"ceo/customers";
     }
 
     @GetMapping("/ceo/assignrole")
@@ -193,7 +230,7 @@ public class AdminController {
     @GetMapping("/ceo/viewreport/{id}")
     public String viewReportDetails(@PathVariable Long id, Model model) {
         model.addAttribute("report", reportService.getReportById(id));
-        return "ceo/report-details";
+        return "ceo/viewreport";
     }
 }
 

@@ -72,29 +72,32 @@
                                 Customers <i class="fa-solid fa-users"></i>
                             </div>
                             <div class="card-body">
-                                <p>Total Customers available:</p>
+                                <p>Total Customers available: <span th:text="${totalCustomers}"></span></p>
                                 <p>Recently Gained Customers:</p>
-                                <ul></ul>
-                                <a href="#" class="btn btn-primary">View All Customers</a>
+                                <ul>
+                                    <li th:each="customer : ${recentCustomers}" th:text="${customer.name}"></li>
+                                </ul>
+                                <a href="/ceo/customers" class="btn btn-primary">View All Customers</a>
                             </div>
                         </div>
                     </div>
-                    <!-- Sales Card (example for future) -->
+
+                    <!-- Sales Card -->
                     <div class="col-md-6 col-lg-3 mb-4">
                         <div class="card shadow">
                             <div class="card-header">
                                 Sales <i class="fa-solid fa-money-bill-transfer"></i>
                             </div>
                             <div class="card-body">
-                                <p>Total Sales Made: ...</p>
-                                <p>Recently Made Sales: ...</p>
-                                <ul></ul>
-                                <a href="#" class="btn btn-primary">View All Sales</a>
+                                <p>Total Sales Made: <span th:text="${totalSales}"></span></p>
+                                <p>Recently Made Sales:</p>
+                                <ul>
+                                    <li th:each="sale : ${recentSales}" th:text="${sale.car.model} + ' - ' + ${#temporals.format(sale.saleDate, 'dd-MM-yyyy')} + ' - $' + ${sale.salePrice}"></li>
+                                </ul>
+                                <a href="/ceo/sales" class="btn btn-primary">View All Sales</a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
                 </div>
             </div>
         </main>

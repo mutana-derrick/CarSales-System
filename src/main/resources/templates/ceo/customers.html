@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Admin | Report</title>
+    <title>Customers | Details</title>
     <!-- favicon -->
     <link rel="icon" type="img/png" href="/static/image/favicon.png">
 
@@ -29,6 +29,7 @@
         <span th:text="${message}"></span>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
+
     <!-- Top Bar -->
     <div th:include="fragments/ceo/topbar :: topbar"></div>
 
@@ -38,34 +39,54 @@
         <!-- Main Content -->
         <main role="main" class="content-wrapper col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="dashboard-container">
-                <h2>Report Management</h2>
-
-                <!-- Existing Reports Card (View for Admin) -->
-                <div class="card shadow mt-4">
+                <h2>Customer Details</h2>
+                <div class="card shadow">
                     <div class="card-header">
-                        <h3>Existing Reports</h3>
+                        Customers <i class="fa-solid fa-users"></i>
                     </div>
                     <div class="card-body">
-                        <table id="example" class="table table-bordered">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h2>All Customers</h2>
+                            <div class="d-flex">
+<!--                                <button class="btn btn-primary shadow me-2" data-bs-toggle="modal" data-bs-target="#addCustomerModal">-->
+<!--                                    Add A Customer-->
+<!--                                </button>-->
+
+                            </div>
+                        </div>
+
+                        <table id="example" class="display nowrap table table-striped" style="width:100%">
                             <thead>
                             <tr>
-                                <th>Report ID</th>
-                                <th>Title</th>
-                                <th>Description</th>
-                                <th>Date Created</th>
-                                <th>Action</th>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Address</th>
+                                <th>Created By</th>
+                                <th>Created At</th>
+                                <th>Modified By</th>
+                                <th>Modified At</th>
+                                <th>Status</th>
+                                <th>Modify</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="report : ${reports}">
-                                <td th:text="${report.id}"></td>
-                                <td th:text="${report.reportTitle}"></td>
-                                <td th:text="${report.reportDescription}"></td>
-                                <td th:text="${#temporals.format(report.createdAt, 'yyyy-MM-dd')}"></td>
+                                <tr th:each="customer : ${customers}">
+                                <td th:text="${customer.customerId}"></td>
+                                <td th:text="${customer.name}"></td>
+                                <td th:text="${customer.email}"></td>
+                                <td th:text="${customer.phone}"></td>
+                                <td th:text="${customer.address}"></td>
+                                <td th:text="${customer.createdBy != null ? customer.createdBy.username : 'Not yet'}"></td>
+                                <td th:text="${#temporals.format(customer.createdAt, 'yyyy-MM-dd HH:mm')}"></td>
+                                <td th:text="${customer.modifiedBy != null ? customer.createdBy.username : 'Not yet'}"></td>
+                                <td th:text="${customer.modifiedAt != null ? #temporals.format(customer.modifiedAt, 'yyyy-MM-dd HH:mm') : 'Not Yet'}"></td>
+                                <td th:text="${customer.status}"></td>
                                 <td>
-                                    <a th:href="@{/ceo/viewreport/{id}(id=${report.id})}" class="btn btn-success">
-                                        <i class="fa-solid fa-eye"></i> View
-                                    </a>
+                                    <button class="btn btn-success">
+                                        <i class="fa-solid fa-user-pen"></i> Edit
+                                    </button>
                                 </td>
                             </tr>
                             </tbody>
@@ -74,9 +95,11 @@
                 </div>
             </div>
         </main>
-
     </div>
 </div>
+
+<!-- include Models -->
+<div th:include="fragments/manager/models :: models"></div>
 
 <!-- Bootstrap JS and cdns -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -90,6 +113,8 @@
 <script src="//cdn.datatables.net/2.0.1/js/dataTables.bootstrap5.js"></script>
 <script src="//cdn.datatables.net/responsive/3.0.0/js/dataTables.responsive.js"></script>
 <script src="//cdn.datatables.net/responsive/3.0.0/js/responsive.bootstrap5.js"></script>
+
+<!-- data table script -->
 <script>
     DataTable.defaults.responsive = true;
     new DataTable('#example');

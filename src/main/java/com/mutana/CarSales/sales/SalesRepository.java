@@ -20,4 +20,7 @@ public interface SalesRepository extends JpaRepository<SalesModel, Long> {
     Long countSalesInDateRange(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
     List<SalesModel> findBySalesperson(UserModel salesperson);
+
+    long count();
+    List<SalesModel> findTop3ByOrderByCreatedAtDesc();
 }
